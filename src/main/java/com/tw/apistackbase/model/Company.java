@@ -24,6 +24,7 @@ public class Company {
     public static List<Company> getListForCompanyTest(){
         List<Company> companies = new ArrayList<>();
         companies.add(new Company("alibaba"));
+        companies.add(new Company("tengxun"));
         return companies;
     }
 

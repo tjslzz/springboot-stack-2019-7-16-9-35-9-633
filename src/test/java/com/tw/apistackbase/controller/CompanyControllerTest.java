@@ -32,10 +32,10 @@ public class CompanyControllerTest {
 
     @Test
     public void should_return_true_company_when_call_get_companies_given_1() throws Exception {
-        mockMvc.perform(get("/companies").param("id"))
+        mockMvc.perform(get("/companies/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().json("{companyName:alibaba}"));
+                .andExpect(content().json("{companyName:tengxun}"));
     }
 }
