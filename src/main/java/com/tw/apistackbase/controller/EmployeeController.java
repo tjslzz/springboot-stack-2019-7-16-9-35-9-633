@@ -25,14 +25,8 @@ public class EmployeeController {
     public List<Employee> getEmployeesByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
         Integer end = page * pageSize - 1;
         Integer start = (page-1)*pageSize;
-        List<Employee> result = new ArrayList<>();
         List<Employee> employees = Employee.getEmployeesForCompanyTest();
-        for(int i =0; i < employees.size();i++){
-            if(i >= start && i <= end){
-                result.add(employees.get(i));
-            }
-        }
-        return result;
+        return employees.stream().filter(employee -> employees.indexOf(employee) >= start && employees.indexOf(employee) <= end).collect(Collectors.toList());
     }
 
     @GetMapping("/employees{gender}")

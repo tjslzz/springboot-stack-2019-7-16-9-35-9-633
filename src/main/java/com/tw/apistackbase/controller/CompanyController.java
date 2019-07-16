@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("companies")
@@ -30,14 +31,8 @@ public class CompanyController {
     public List<Company> getCompaniesByPage(@RequestParam Integer page,@RequestParam Integer pageSize) {
         Integer end = page * pageSize - 1;
         Integer start = (page-1)*pageSize;
-        List<Company> result = new ArrayList<>();
         List<Company> companies = Company.getListForCompanyTest();
-        for(int i =0; i < companies.size();i++){
-            if(i >= start && i <= end){
-                result.add(companies.get(i));
-            }
-        }
-        return result;
+        return companies.stream().filter(company -> companies.indexOf(company) >= start && companies.indexOf(company) <= end).collect(Collectors.toList());
     }
 
     @PostMapping
