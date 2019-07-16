@@ -22,12 +22,12 @@ public class CompanyController {
     }
 
     @GetMapping(path = "/{index}/employees")
-    public List<Employee> getEmployeeByCompany(@PathVariable Integer index) {
+    public List<Employee> getEmployeesByCompany(@PathVariable Integer index) {
         return Company.getListForCompanyTest().get(index).getEmployees();
     }
 
     @GetMapping(path = "{page}{pageSize}")
-    public List<Company> getCompanies(@RequestParam Integer page,@RequestParam Integer pageSize) {
+    public List<Company> getCompaniesByPage(@RequestParam Integer page,@RequestParam Integer pageSize) {
         Integer end = page * pageSize - 1;
         Integer start = (page-1)*pageSize;
         List<Company> result = new ArrayList<>();
@@ -38,5 +38,13 @@ public class CompanyController {
             }
         }
         return result;
+    }
+
+    @PostMapping
+    public String putCompany(@RequestBody Company company){
+        List<Company> companies = Company.getListForCompanyTest();
+        Integer size = companies.size();
+        companies.add(company);
+        return companies.size() - size == 1 ? "ok":"no";
     }
 }

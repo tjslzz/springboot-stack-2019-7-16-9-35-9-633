@@ -51,4 +51,16 @@ public class Company {
         return companies;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"companyName\":\"")
+                .append(companyName).append('\"');
+        sb.append(",\"employees\":")
+                .append(employees);
+        sb.append(",\"employeesNumber\":")
+                .append(employeesNumber);
+        sb.append('}');
+        return sb.toString();
+    }
 }
