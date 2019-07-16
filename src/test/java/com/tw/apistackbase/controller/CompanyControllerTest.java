@@ -68,4 +68,13 @@ public class CompanyControllerTest {
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(content().string(containsString("ok")));
     }
+
+    @Test
+    public void should_return_ok_when_call_put_companies_given_new_company() throws Exception {
+        mockMvc.perform(post("/companies/1").contentType("application/json;charset=UTF-8").content("{\"companyName\":\"oocl\",\"employees\":[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}],\"employeesNumber\":0}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
+                .andExpect(content().string(containsString("ok")));
+    }
 }
