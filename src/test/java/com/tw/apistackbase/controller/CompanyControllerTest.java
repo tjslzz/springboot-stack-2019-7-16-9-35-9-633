@@ -47,4 +47,13 @@ public class CompanyControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().json("[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}]"));
     }
+
+    @Test
+    public void should_return_true_company_list_when_call_get_companies_given_pages() throws Exception {
+        mockMvc.perform(get("/companies?page=1&pageSize=5"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[{companyName:alibaba}]"));
+    }
 }
