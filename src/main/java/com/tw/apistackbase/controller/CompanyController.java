@@ -48,12 +48,18 @@ public class CompanyController {
         return companies.size() - size == 1 ? "ok":"no";
     }
 
-
     @PutMapping(path = "/{index}")
     public String putCompany(@PathVariable Integer index,@RequestBody Company company){
         List<Company> companies = Company.getListForCompanyTest();
         String olc_name = companies.get(index).getCompanyName();
         companies.remove(index);companies.add(company);
         return companies.get(index).getCompanyName().equalsIgnoreCase(olc_name) ? "ok":"no";
+    }
+
+    @DeleteMapping(path = "/{index}")
+    public String deleteCompany(@PathVariable Integer index){
+        List<Company> companies = Company.getListForCompanyTest();
+        companies.remove(index);
+        return "ok";
     }
 }
