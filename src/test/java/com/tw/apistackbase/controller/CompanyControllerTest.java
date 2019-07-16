@@ -1,6 +1,5 @@
 package com.tw.apistackbase.controller;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -18,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CompanyControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -26,7 +26,7 @@ public class CompanyControllerTest {
         mockMvc.perform(get("/companies"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(""))
-                .andExpect(content().json(""));
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[{companyName:alibaba}]"));
     }
 }

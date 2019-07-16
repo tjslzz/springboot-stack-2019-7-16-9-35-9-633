@@ -13,7 +13,7 @@ public class CompanyController {
 
     @GetMapping
     public List<Company> getCompanies(){
-        return null;
+        return Company.getListForCompanyTest();
     }
 
 
