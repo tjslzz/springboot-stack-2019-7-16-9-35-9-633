@@ -17,32 +17,14 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CompanyControllerTest {
+public class EmployeeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void should_return_company_list_when_call_get_companies() throws Exception {
-        mockMvc.perform(get("/companies"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().json("[{companyName:alibaba}]"));
-    }
-
-    @Test
-    public void should_return_true_company_when_call_get_companies_given_1() throws Exception {
-        mockMvc.perform(get("/companies/1"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().json("{companyName:tengxun}"));
-    }
-
-    @Test
-    public void should_return_true_employee_list_when_call_get_companies_employees_given_1() throws Exception {
-        mockMvc.perform(get("/companies/1/employees"))
+    public void should_return_company_list_when_call_get_employees() throws Exception {
+        mockMvc.perform(get("/employees"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -50,17 +32,35 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void should_return_true_company_list_when_call_get_companies_given_pages() throws Exception {
-        mockMvc.perform(get("/companies?page=1&pageSize=5"))
+    public void should_return_true_company_when_call_get_employees_given_1() throws Exception {
+        mockMvc.perform(get("/employees/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().json("[{\"companyName\":\"alibaba\",\"employees\":[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}],\"employeesNumber\":0},{\"companyName\":\"tengxun\",\"employees\":[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}],\"employeesNumber\":0}]"));
+                .andExpect(content().json("{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}"));
     }
 
     @Test
-    public void should_return_ok_when_call_post_companies_given_company() throws Exception {
-        mockMvc.perform(post("/companies").contentType("application/json;charset=UTF-8").content("{\"companyName\":\"alibaba\",\"employees\":[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}],\"employeesNumber\":0}"))
+    public void should_return_true_employee_list_when_call_get_employees_employees_given_1() throws Exception {
+        mockMvc.perform(get("/employees?gender=male"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}]"));
+    }
+
+    @Test
+    public void should_return_true_company_list_when_call_get_employees_given_pages() throws Exception {
+        mockMvc.perform(get("/employees?page=1&pageSize=5"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}]"));
+    }
+
+    @Test
+    public void should_return_ok_when_call_post_employees_given_company() throws Exception {
+        mockMvc.perform(post("/employees").contentType("application/json;charset=UTF-8").content("{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
@@ -68,8 +68,8 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void should_return_ok_when_call_put_companies_given_new_company() throws Exception {
-        mockMvc.perform(put("/companies/1").contentType("application/json;charset=UTF-8").content("{\"companyName\":\"oocl\",\"employees\":[{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}],\"employeesNumber\":0}"))
+    public void should_return_ok_when_call_put_employees_given_new_company() throws Exception {
+        mockMvc.perform(put("/employees/1").contentType("application/json;charset=UTF-8").content("{\"id\":1,\"name\":\"jerry\",\"age\":22,\"gender\":\"male\",\"salary\":10000},{\"id\":2,\"name\":\"laura\",\"age\":22,\"gender\":\"female\",\"salary\":10000}"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
@@ -77,8 +77,8 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void should_return_ok_when_call_delete_companies_given_1() throws Exception {
-        mockMvc.perform(delete("/companies/1"))
+    public void should_return_ok_when_call_delete_employees_given_1() throws Exception {
+        mockMvc.perform(delete("/employees/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
