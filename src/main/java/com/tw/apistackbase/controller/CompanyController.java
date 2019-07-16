@@ -2,11 +2,9 @@ package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,5 +24,19 @@ public class CompanyController {
     @GetMapping(path = "/{index}/employees")
     public List<Employee> getEmployeeByCompany(@PathVariable Integer index) {
         return Company.getListForCompanyTest().get(index).getEmployees();
+    }
+
+    @GetMapping(path = "{page}{pageSize}")
+    public List<Company> getCompanies(@RequestParam Integer page,@RequestParam Integer pageSize) {
+        Integer end = page * pageSize - 1;
+        Integer start = (page-1)*pageSize;
+        List<Company> result = new ArrayList<>();
+        List<Company> companies = Company.getListForCompanyTest();
+        for(int i =0; i < companies.size();i++){
+            if(i >= start && i <= end){
+                result.add(companies.get(i));
+            }
+        }
+        return result;
     }
 }
