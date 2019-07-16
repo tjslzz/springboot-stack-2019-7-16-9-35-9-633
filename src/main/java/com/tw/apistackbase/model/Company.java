@@ -6,6 +6,8 @@ import java.util.List;
 public class Company {
 
     private String companyName;
+    private List<Employee> employees = new ArrayList<>();
+    private Integer employeesNumber = employees.size();
 
     public Company() { }
 
@@ -19,6 +21,22 @@ public class Company {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Integer getEmployeesNumber() {
+        return employeesNumber;
+    }
+
+    public void setEmployeesNumber(Integer employeesNumber) {
+        this.employeesNumber = employeesNumber;
     }
 
     public static List<Company> getListForCompanyTest(){

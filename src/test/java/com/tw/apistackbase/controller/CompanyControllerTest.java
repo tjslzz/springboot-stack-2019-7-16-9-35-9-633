@@ -38,4 +38,13 @@ public class CompanyControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().json("{companyName:tengxun}"));
     }
+
+    @Test
+    public void should_return_true_employee_list_when_call_get_companies_employees_given_1() throws Exception {
+        mockMvc.perform(get("/companies/1/employees"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json(""));
+    }
 }
