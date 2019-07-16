@@ -1,6 +1,7 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Company;
+import com.tw.apistackbase.model.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,17 @@ import java.util.List;
 public class CompanyController {
 
     @GetMapping
-    public List<Company> getCompanies(){
+    public List<Company> getCompanies() {
         return Company.getListForCompanyTest();
     }
 
     @GetMapping(path = "/{index}")
-    public Company getCompany(@PathVariable Integer index){
+    public Company getCompany(@PathVariable Integer index) {
         return Company.getListForCompanyTest().get(index);
     }
 
+    @GetMapping(path = "/{index}/employees")
+    public List<Employee> getEmployeeByCompany(@PathVariable Integer index) {
+        return Company.getListForCompanyTest().get(index).getEmployees();
+    }
 }

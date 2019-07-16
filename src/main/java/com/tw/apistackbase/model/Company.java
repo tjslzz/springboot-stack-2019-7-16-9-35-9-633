@@ -15,6 +15,11 @@ public class Company {
         this.companyName = companyName;
     }
 
+    public Company(String companyName, List<Employee> employees) {
+        this.companyName = companyName;
+        this.employees = employees;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
@@ -41,8 +46,8 @@ public class Company {
 
     public static List<Company> getListForCompanyTest(){
         List<Company> companies = new ArrayList<>();
-        companies.add(new Company("alibaba"));
-        companies.add(new Company("tengxun"));
+        companies.add(new Company("alibaba",Employee.getEmployeesForCompanyTest()));
+        companies.add(new Company("tengxun",Employee.getEmployeesForCompanyTest()));
         return companies;
     }
 
